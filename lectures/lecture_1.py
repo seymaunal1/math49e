@@ -1,6 +1,6 @@
-from functools import reduce
 import operator
 import timeit
+from functools import reduce
 
 # import sys
 # sys.setrecursionlimit(int(4e6))
