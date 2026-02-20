@@ -1,6 +1,6 @@
 import timeit
 
-from .math49emodule import get_files_path
+from math49emodule import get_files_path
 
 
 def solve_problem_67() -> None:
