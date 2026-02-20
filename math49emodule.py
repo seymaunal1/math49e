@@ -22,20 +22,27 @@ class TreeNode(Generic[Type]):
         self.left_child = left_child
         self.right_child = right_child
 
-    def set_data(self, data: Type) -> None:
-        self.data = data
 
-    def set_left_child(self, left_child: TreeNode[Type]) -> None:
-        self.left_child = left_child
+class IntegerTreeNode(TreeNode[int]):
+    sum = 0
 
-    def set_right_child(self, right_child: TreeNode[Type]) -> None:
-        self.right_child = right_child
+    def walk_tree(self, node: Optional[TreeNode[int]] = None) -> None:
+        if node is None:
+            node = self
 
-    def get_data(self) -> Optional[Type]:
-        return self.data
+        if node.data:
+            self.sum += node.data
 
-    def get_left_child(self) -> Optional[TreeNode[Type]]:
-        return self.left_child
-
-    def get_right_child(self) -> Optional[TreeNode[Type]]:
-        return self.right_child
+        if (
+            node.left_child
+            and node.left_child.data
+            and node.right_child
+            and node.right_child.data
+        ):
+            self.walk_tree(
+                node.left_child
+                if node.left_child.data > node.right_child.data
+                else node.right_child
+            )
+        else:
+            print(self.sum)
