@@ -22,6 +22,9 @@ class TreeNode(Generic[Type]):
         self.left_child = left_child
         self.right_child = right_child
 
+    def __str__(self) -> str:
+        return str(self.data)
+
 
 class IntegerTreeNode(TreeNode[int]):
     sum = 0
