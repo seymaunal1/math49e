@@ -6,11 +6,18 @@ This is a alternative solution for problem 8:
 * https://projecteuler.net/thread=8;page=5#446032
 """
 """
-- Total Time of Their Code: 0.0003581047058105469
-- Total Time For My Solution: 0.00042819976806640625
+- Total time of alternative solution: 0.0003581047058105469
+- Total time of my solution: 0.00042819976806640625
 
-Main Reason for This Difference: They used a simple for loop to calculate the product of the digits instead of
-using lambda, map, and reduce function like I did. So these additional functions made my solution less efficient.
+Main reason for this difference: They used a simple for loop to calculate the product of the digits instead of
+using functions like map and reduce like I did. So these additional functions made my solution less efficient.
+
+Or alternative answer:
+
+Main reason for this difference is the function call overhead in my solution. While functions like map() and reduce() are elegant,
+they require multiple lambda calls and the creation of intermediate list objects (e.g., list(result)).
+The alternative solution uses a direct for loop to calculate the product. By avoiding lambda functions and extra object allocations,
+the code executes more efficiently, leading to a faster overall runtime.
 """
 
 begin = time.time()
