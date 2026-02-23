@@ -4,7 +4,8 @@ from functools import reduce
 
 
 def solve_problem_8() -> None:
-    numbers = (
+    # Input numbers as string
+    numbers: str = (
         "73167176531330624919225119674426574742355349194934"
         "96983520312774506326239578318016984801869478851843"
         "85861560789112949495459501737958331952853208805511"
@@ -26,12 +27,14 @@ def solve_problem_8() -> None:
         "05886116467109405077541002256983155200055935729725"
         "71636269561882670428252483600823257530420752963450"
     )
+
     #  Number of adjacent digits to evaluate per slice
-    lookahead = 13
+    lookahead: int = 13
+
     results: list[str] = []
-    # Iterate through the string using
+    # Iterate through the string using for loop
     for index in range(0, len(numbers) - (lookahead - 1)):
-        current_result = numbers[index : index + lookahead]
+        current_result: str = numbers[index : index + lookahead]
 
         #  Optimization step:
         #  Zero can not be inside in this 13 adjacent group, otherwise the result will be zero.
@@ -41,8 +44,8 @@ def solve_problem_8() -> None:
     # Compute the product of digits for each valid slice, then return the maximum product found.
     # To be able to do that:
     # - Convert each character to integer
-    # - Multiply digits using reduce and operator.mul
-    # - Compare all results
+    # - Multiply digits using reduce and multiplication operator
+    # - Compare all results and find the maximum
     print(
         max(
             map(
