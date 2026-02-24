@@ -27,16 +27,13 @@ class TreeNode(Generic[Type]):
 
 
 class IntegerTreeNode(TreeNode[int]):
-    sum = 0
-
-    def walk_tree(self, node: Optional[TreeNode[int]] = None) -> None:
+    def walk_tree(self, node: Optional[TreeNode[int]] = None, sum: int = 0) -> None:
         if node is None:
             node = self
 
         if node.data:
             print(node.data, end=" ")
-
-            self.sum += node.data
+            sum += node.data
 
         if (
             node.left_child
@@ -49,7 +46,8 @@ class IntegerTreeNode(TreeNode[int]):
             self.walk_tree(
                 node.left_child
                 if node.left_child.data > node.right_child.data
-                else node.right_child
+                else node.right_child,
+                sum,
             )
         else:
-            print("=", self.sum)
+            print("=", sum)
