@@ -15,7 +15,7 @@ def parse_triangle(input: str) -> IntegerTreeNode:
     return node_rows[0][0]
 
 
-def solve_problem_67_example() -> None:
+def solve_example_problem() -> None:
     example = "3\n7 4\n2 4 6\n8 5 9 3\n"
     root = parse_triangle(example)
     root.walk_tree()
@@ -27,9 +27,8 @@ def solve_problem_67() -> None:
         root.walk_tree()
 
 
-# check the time again
 if __name__ == "__main__":
-    functions = [solve_problem_67_example, solve_problem_67]
+    functions = [solve_example_problem, solve_problem_67]
     for index, function in enumerate(functions):
         print(f"Result of {function.__name__} is:", end=" ")
         begin = time.perf_counter()
