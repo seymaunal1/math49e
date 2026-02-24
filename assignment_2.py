@@ -37,7 +37,7 @@ if __name__ == "__main__":
     functions = [solve_example_problem, solve_problem_18, solve_problem_67]
 
     for index, function in enumerate(functions):
-        print(f"Result of {function.__name__} is:", end=" ")
+        print(f"Result of {function.__name__} is:")
         begin = time.perf_counter()
         function()
         end = time.perf_counter()

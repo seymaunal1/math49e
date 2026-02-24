@@ -34,6 +34,8 @@ class IntegerTreeNode(TreeNode[int]):
             node = self
 
         if node.data:
+            print(node.data, end=" ")
+
             self.sum += node.data
 
         if (
@@ -42,10 +44,12 @@ class IntegerTreeNode(TreeNode[int]):
             and node.right_child
             and node.right_child.data
         ):
+            print("+", end=" ")
+
             self.walk_tree(
                 node.left_child
                 if node.left_child.data > node.right_child.data
                 else node.right_child
             )
         else:
-            print(self.sum)
+            print("=", self.sum)
