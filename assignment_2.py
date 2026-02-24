@@ -33,7 +33,7 @@ def solve_problem_67() -> int:
     with open(get_files_path() / "0067_triangle.txt") as file:
         root = parse_triangle(file.read())
 
-    return root.walk_tree_completely()
+    return root.walk_tree_optimized()
 
 
 if __name__ == "__main__":
