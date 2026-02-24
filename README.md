@@ -12,10 +12,24 @@ Install all dependencies:
 uv sync
 ```
 
-Install [pre-commit](https://pre-commit.com/) git hook scripts:
+Install [pre-commit](https://pre-commit.com) git hook scripts:
 
 ```bash
 uv run pre-commit install
+```
+
+## Usage
+
+Run Python file:
+
+```bash
+uv run ./problem_zero.py
+```
+
+Run [pre-commit](https://pre-commit.com) hooks:
+
+```bash
+uv run pre-commit run --all-files
 ```
 
 ## List of Solutions
