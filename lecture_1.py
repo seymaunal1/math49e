@@ -1,6 +1,7 @@
 import operator
 import timeit
 from functools import reduce
+from typing import Any, Callable
 
 # import sys
 # sys.setrecursionlimit(int(4e6))
@@ -67,26 +68,21 @@ def solve_problem_2d(old_fibonacci: int, fibonacci: int, sum: int) -> int:
     )
 
 
-if __name__ == "__main__":
+def solve_problem(name: str, function: Callable[[], Any]) -> None:
+    print(f"Result of {name} is {function()}.")
+
     number_of_repetitions = 1000
+    time = timeit.timeit(function, number=number_of_repetitions)
+    print(f"{name} solved in {time} seconds.")
 
-    time_1 = timeit.timeit(solve_problem_1, number=number_of_repetitions)
-    time_2a = timeit.timeit(solve_problem_2a, number=number_of_repetitions)
-    time_2b = timeit.timeit(
-        lambda: solve_problem_2b([1, 2]), number=number_of_repetitions
-    )
-    time_2c = timeit.timeit(
-        lambda: solve_problem_2c([1, 2]), number=number_of_repetitions
-    )
-    time_2d = timeit.timeit(
-        lambda: solve_problem_2d(1, 2, 0), number=number_of_repetitions
-    )
 
-    print(f"Problem 1 solved in {time_1} seconds.")
-    print(f"Problem 2a solved in {time_2a} seconds.")
-    print(f"Problem 2b solved in {time_2b} seconds.")
-    print(f"Problem 2c solved in {time_2c} seconds.")
-    print(f"Problem 2d solved in {time_2d} seconds.")
-
-    print("Sum 2c:", solve_problem_2c([1, 2]))
-    print("Sum 2d:", solve_problem_2d(1, 2, 0))
+if __name__ == "__main__":
+    solve_problem("Problem 1", solve_problem_1)
+    print()
+    solve_problem("Problem 2a", solve_problem_2a)
+    print()
+    solve_problem("Problem 2b", lambda: solve_problem_2b([1, 2]))
+    print()
+    solve_problem("Problem 2c", lambda: solve_problem_2c([1, 2]))
+    print()
+    solve_problem("Problem 2d", lambda: solve_problem_2d(1, 2, 0))
