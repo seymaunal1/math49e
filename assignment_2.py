@@ -7,10 +7,10 @@ def parse_triangle(input: str) -> IntegerTreeNode:
     rows = [list(map(int, line.split())) for line in input.splitlines()]
     node_rows = [[IntegerTreeNode(value) for value in row] for row in rows]
 
-    for r in range(len(node_rows) - 1):
-        for c in range(len(node_rows[r])):
-            node_rows[r][c].left_child = node_rows[r + 1][c]
-            node_rows[r][c].right_child = node_rows[r + 1][c + 1]
+    for row in range(len(node_rows) - 1):
+        for column in range(len(node_rows[row])):
+            node_rows[row][column].left_child = node_rows[row + 1][column]
+            node_rows[row][column].right_child = node_rows[row + 1][column + 1]
 
     return node_rows[0][0]
 
