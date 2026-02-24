@@ -51,3 +51,30 @@ class IntegerTreeNode(TreeNode[int]):
             )
         else:
             print("=", sum)
+
+    def walk_tree_completely(
+        self, node: Optional[TreeNode[int]] = None, sum: int = 0
+    ) -> int:
+        if node is None:
+            node = self
+
+        if node.data:
+            sum += node.data
+
+        # If we are at a leaf node, return this path's sum
+        if not node.left_child and not node.right_child:
+            return sum
+
+        # Variables to store the highest sums from our left and right branches
+        left_max = 0
+        right_max = 0
+
+        # Recursively find the maximum values in left and right branches
+        if node.left_child:
+            left_max = self.walk_tree_completely(node.left_child, sum)
+
+        if node.right_child:
+            right_max = self.walk_tree_completely(node.right_child, sum)
+
+        # Return whichever branch gave us the bigger number
+        return max(left_max, right_max)
