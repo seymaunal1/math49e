@@ -15,31 +15,33 @@ def parse_triangle(input: str) -> IntegerTreeNode:
     return node_rows[0][0]
 
 
-def solve_example_problem() -> None:
+def solve_example_problem() -> int:
     example = "3\n7 4\n2 4 6\n8 5 9 3\n"
     root = parse_triangle(example)
-    root.walk_tree()
+
+    return root.walk_tree()
 
 
-def solve_problem_18() -> None:
+def solve_problem_18() -> int:
     with open(get_files_path() / "0018_triangle.txt") as file:
         root = parse_triangle(file.read())
-        root.walk_tree()
+
+    return root.walk_tree_completely()
 
 
-def solve_problem_67() -> None:
+def solve_problem_67() -> int:
     with open(get_files_path() / "0067_triangle.txt") as file:
         root = parse_triangle(file.read())
-        root.walk_tree()
+
+    return root.walk_tree_completely()
 
 
 if __name__ == "__main__":
     functions = [solve_example_problem, solve_problem_18, solve_problem_67]
 
     for index, function in enumerate(functions):
-        print(f"Result of {function.__name__} is:")
         begin = time.perf_counter()
-        function()
+        print(f"Result of {function.__name__} is {function()}.")
         end = time.perf_counter()
         print(f"Finished in {end - begin} seconds.")
 
