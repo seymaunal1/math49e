@@ -21,8 +21,13 @@ def solve_problem_2a() -> list[int]:
     n = 4e6
     fibonacci = [1, 2]
 
-    while fibonacci[-1] <= n:
-        fibonacci.append(fibonacci[-1] + fibonacci[-2])
+    while True:
+        new_fibonacci = fibonacci[-1] + fibonacci[-2]
+
+        if new_fibonacci > n:
+            break
+
+        fibonacci.append(new_fibonacci)
 
     return fibonacci
 
