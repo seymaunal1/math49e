@@ -6,7 +6,6 @@ from math49emodule import IntegerTreeNode, get_files_path
 def parse_triangle(input: str) -> IntegerTreeNode:
     rows = [list(map(int, line.split())) for line in input.splitlines()]
     node_rows = [[IntegerTreeNode(value) for value in row] for row in rows]
-    print(node_rows)
 
     for r in range(len(node_rows) - 1):
         for c in range(len(node_rows[r])):
@@ -30,8 +29,13 @@ def solve_problem_67() -> None:
 
 # check the time again
 if __name__ == "__main__":
-    begin = time.perf_counter()
-    solve_problem_67_example()
-    solve_problem_67()
-    end = time.perf_counter()
-    print(f"Finished in {end - begin} seconds.")
+    functions = [solve_problem_67_example, solve_problem_67]
+    for index, function in enumerate(functions):
+        print(f"Result of {function.__name__} is:", end=" ")
+        begin = time.perf_counter()
+        function()
+        end = time.perf_counter()
+        print(f"Finished in {end - begin} seconds.")
+
+        if index < len(functions) - 1:
+            print()
