@@ -21,6 +21,12 @@ def solve_example_problem() -> None:
     root.walk_tree()
 
 
+def solve_problem_18() -> None:
+    with open(get_files_path() / "0018_triangle.txt") as file:
+        root = parse_triangle(file.read())
+        root.walk_tree()
+
+
 def solve_problem_67() -> None:
     with open(get_files_path() / "0067_triangle.txt") as file:
         root = parse_triangle(file.read())
@@ -28,7 +34,8 @@ def solve_problem_67() -> None:
 
 
 if __name__ == "__main__":
-    functions = [solve_example_problem, solve_problem_67]
+    functions = [solve_example_problem, solve_problem_18, solve_problem_67]
+
     for index, function in enumerate(functions):
         print(f"Result of {function.__name__} is:", end=" ")
         begin = time.perf_counter()
