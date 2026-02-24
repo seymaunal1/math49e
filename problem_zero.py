@@ -1,4 +1,4 @@
-import timeit
+import time
 
 
 # I am so confused about writing return, should I?
@@ -34,7 +34,7 @@ def solve_problem_0() -> int:
 
 
 if __name__ == "__main__":
-    begin = timeit.timeit()
+    begin = time.perf_counter()
     print(solve_problem_0())
-    end = timeit.timeit()
+    end = time.perf_counter()
     print(f"Finished in {end - begin} seconds.")

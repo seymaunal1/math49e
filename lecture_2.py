@@ -44,7 +44,7 @@ def solve_problem_104() -> Any:
 
 
 if __name__ == "__main__":
-    begin = time.time()
+    begin = time.perf_counter()
     print(solve_problem_57())
-    end = time.time()
+    end = time.perf_counter()
     print(f"Finished in {end - begin} seconds.")

@@ -1,4 +1,4 @@
-import timeit
+import time
 
 from math49emodule import IntegerTreeNode, get_files_path
 
@@ -30,8 +30,8 @@ def solve_problem_67() -> None:
 
 # check the time again
 if __name__ == "__main__":
-    begin = timeit.timeit()
+    begin = time.perf_counter()
     solve_problem_67_example()
     solve_problem_67()
-    end = timeit.timeit()
+    end = time.perf_counter()
     print(f"Finished in {end - begin} seconds.")

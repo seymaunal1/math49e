@@ -60,7 +60,7 @@ def solve_problem_8() -> None:
 
 # To keep the program structure clear and readable
 if __name__ == "__main__":
-    begin = time.time()
+    begin = time.perf_counter()
     solve_problem_8()
-    end = time.time()
+    end = time.perf_counter()
     print(f"Finished in {end - begin} seconds.")
