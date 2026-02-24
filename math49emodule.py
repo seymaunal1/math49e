@@ -80,6 +80,7 @@ class IntegerTreeNode(TreeNode[int]):
         # Return whichever branch gave us the bigger number
         return max(left_max, right_max)
 
+    # TODO: Remove this @cache and see the difference 🤯😘
     @cache
     def walk_tree_optimized(self, node: Optional[TreeNode[int]] = None) -> int:
         if node is None:
