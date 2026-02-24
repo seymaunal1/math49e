@@ -5,3 +5,13 @@ description = "Solutions to Project Euler problems"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = []
+
+[dependency-groups]
+dev = [
+    "mypy>=1.19.1",
+    "pre-commit>=4.5.1",
+    "ty>=0.0.18",
+]
+
+[tool.ruff.lint]
+extend-select = ["I"]
