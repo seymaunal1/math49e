@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from functools import cache
 from pathlib import Path
 from typing import Generic, Optional, TypeVar
 
@@ -79,25 +80,24 @@ class IntegerTreeNode(TreeNode[int]):
         # Return whichever branch gave us the bigger number
         return max(left_max, right_max)
 
-    def walk_tree_optimized(
-        self, node: Optional[TreeNode[int]] = None, sum: int = 0
-    ) -> int:
+    @cache
+    def walk_tree_optimized(self, node: Optional[TreeNode[int]] = None) -> int:
         if node is None:
             node = self
 
-        if node.data:
-            sum += node.data
-
+        # If we are at a leaf node, return its data
         if not node.left_child and not node.right_child:
-            return sum
+            return node.data or 0
 
+        # Get the max sum of the left and right branches
         left_max = 0
         right_max = 0
 
         if node.left_child:
-            left_max = self.walk_tree_completely(node.left_child, sum)
+            left_max = self.walk_tree_optimized(node.left_child)
 
         if node.right_child:
-            right_max = self.walk_tree_completely(node.right_child, sum)
+            right_max = self.walk_tree_optimized(node.right_child)
 
-        return max(left_max, right_max)
+        # Add this node's data to the bigger of the two branches and return it up
+        return (node.data or 0) + max(left_max, right_max)
