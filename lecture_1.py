@@ -72,9 +72,15 @@ if __name__ == "__main__":
 
     time_1 = timeit.timeit(solve_problem_1, number=number_of_repetitions)
     time_2a = timeit.timeit(solve_problem_2a, number=number_of_repetitions)
-    time_2b = timeit.timeit(lambda: solve_problem_2b([1, 2]), number=number_of_repetitions)
-    time_2c = timeit.timeit(lambda: solve_problem_2c([1, 2]), number=number_of_repetitions)
-    time_2d = timeit.timeit(lambda: solve_problem_2d(1, 2, 0), number=number_of_repetitions)
+    time_2b = timeit.timeit(
+        lambda: solve_problem_2b([1, 2]), number=number_of_repetitions
+    )
+    time_2c = timeit.timeit(
+        lambda: solve_problem_2c([1, 2]), number=number_of_repetitions
+    )
+    time_2d = timeit.timeit(
+        lambda: solve_problem_2d(1, 2, 0), number=number_of_repetitions
+    )
 
     print(f"Problem 1 solved in {time_1} seconds.")
     print(f"Problem 2a solved in {time_2a} seconds.")
