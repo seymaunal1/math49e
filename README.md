@@ -2,6 +2,22 @@
 
 Solutions to [Project Euler](https://projecteuler.net/archives) problems
 
+## Installation
+
+If you haven't already, start by [installing uv](https://docs.astral.sh/uv/getting-started/installation/).
+
+Install all dependencies:
+
+```bash
+uv sync
+```
+
+Install [pre-commit](https://pre-commit.com/) git hook scripts:
+
+```bash
+uv run pre-commit install
+```
+
 ## List of Solutions
 
 - [x] Solutions to [Problem 0](./problem_zero.py)
