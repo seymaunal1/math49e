@@ -42,5 +42,5 @@ uv run pre-commit run --all-files
 - [x] Solutions to [Problem 18](./assignment_2.py)
 - [x] Solutions to [Problem 57](./lecture_2.py)
 - [ ] Solutions to [Problem 64](./lecture_2.py)
-- [ ] Solutions to [Problem 67](./assignment_2.py)
+- [x] Solutions to [Problem 67](./assignment_2.py)
 - [ ] Solutions to [Problem 104](./lecture_2.py)
