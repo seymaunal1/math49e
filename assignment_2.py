@@ -29,6 +29,13 @@ def solve_problem_18() -> int:
     return root.walk_tree_completely()
 
 
+def solve_problem_18_optimized() -> int:
+    with open(get_files_path() / "0018_triangle.txt") as file:
+        root = parse_triangle(file.read())
+
+    return root.walk_tree_optimized()
+
+
 def solve_problem_67() -> int:
     with open(get_files_path() / "0067_triangle.txt") as file:
         root = parse_triangle(file.read())
@@ -37,7 +44,12 @@ def solve_problem_67() -> int:
 
 
 if __name__ == "__main__":
-    functions = [solve_example_problem, solve_problem_18, solve_problem_67]
+    functions = [
+        solve_example_problem,
+        solve_problem_18,
+        solve_problem_18_optimized,
+        solve_problem_67,
+    ]
 
     for index, function in enumerate(functions):
         begin = time.perf_counter()
