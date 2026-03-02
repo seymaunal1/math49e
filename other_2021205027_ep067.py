@@ -11,16 +11,12 @@ This is a alternative solution for problem 67:
 - Total time of my solution: 0.0011720657348632812 seconds.
 
 Main reason for this difference:
-This person did not read the triangle from a .txt file; the data is already in the script (in memory).
+This person did not read the triangle from a text file; the data is already in the script (in memory).
 In my solution, I open and read the file at runtime, and this extra file makes it slower.
 Also, my code uses more function calls, compare to their code, this makes it less efficient.
 """
 
 
-
-
-
-begin = time.time()
 paths = """
 59
 73 41
@@ -125,32 +121,25 @@ paths = """
 """
 
 
-def convert_str_to_matrix(paths):
-
+def convert_str_to_matrix(paths: str) -> list[list[int]]:
     rows = paths.strip().split("\n")
     matrix = [list(map(int, row.split())) for row in rows]
 
     return matrix
 
 
-def maximum_path(matrix):
-
+def maximum_path(matrix: list[list[int]]) -> int:
     for row in range(len(matrix) - 1, 0, -1):
-
         for column in range(len(matrix[row]) - 1):
-
             matrix[row - 1][column] += max(matrix[row][column], matrix[row][column + 1])
 
-
-    maximum_path = matrix[0][0]
-
-    return maximum_path
+    return matrix[0][0]
 
 
-matrix = convert_str_to_matrix(paths)
-
-maximum_path_sum = maximum_path(matrix)
-
-print(f"The maximum path sum is: {maximum_path_sum}")
-end = time.time()
-print(f"Finished in {end - begin} seconds.")
+if __name__ == "__main__":
+    begin = time.time()
+    matrix = convert_str_to_matrix(paths)
+    maximum_path_sum = maximum_path(matrix)
+    print(f"The maximum path sum is: {maximum_path_sum}")
+    end = time.time()
+    print(f"Finished in {end - begin} seconds.")
