@@ -50,7 +50,14 @@ def solve_problem_18_optimized() -> int:
     return root.walk_tree_optimized()
 
 
-def solve_problem_67() -> int:
+def solve_problem_18_simple() -> int:
+    with open(get_files_path() / "0018_triangle.txt") as file:
+        triangle: list[list[int]] = parse_triangle_simple(file.read())
+
+    return get_max_path_sum_bottom_up(triangle)
+
+
+def solve_problem_67_optimized() -> int:
     with open(get_files_path() / "0067_triangle.txt") as file:
         root: IntegerTreeNode = parse_triangle(file.read())
 
@@ -69,7 +76,8 @@ if __name__ == "__main__":
         solve_example_problem,
         solve_problem_18,
         solve_problem_18_optimized,
-        solve_problem_67,
+        solve_problem_18_simple,
+        solve_problem_67_optimized,
         solve_problem_67_simple,
     ]
 
