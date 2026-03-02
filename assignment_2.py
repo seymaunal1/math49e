@@ -16,29 +16,29 @@ def parse_triangle(input: str) -> IntegerTreeNode:
 
 
 def solve_example_problem() -> int:
-    example = "3\n7 4\n2 4 6\n8 5 9 3\n"
-    root = parse_triangle(example)
+    example: str = "3\n7 4\n2 4 6\n8 5 9 3\n"
+    root: IntegerTreeNode = parse_triangle(example)
 
     return root.walk_tree()
 
 
 def solve_problem_18() -> int:
     with open(get_files_path() / "0018_triangle.txt") as file:
-        root = parse_triangle(file.read())
+        root: IntegerTreeNode = parse_triangle(file.read())
 
     return root.walk_tree_completely()
 
 
 def solve_problem_18_optimized() -> int:
     with open(get_files_path() / "0018_triangle.txt") as file:
-        root = parse_triangle(file.read())
+        root: IntegerTreeNode = parse_triangle(file.read())
 
     return root.walk_tree_optimized()
 
 
 def solve_problem_67() -> int:
     with open(get_files_path() / "0067_triangle.txt") as file:
-        root = parse_triangle(file.read())
+        root: IntegerTreeNode = parse_triangle(file.read())
 
     return root.walk_tree_optimized()
 
