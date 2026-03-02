@@ -1,6 +1,7 @@
 import time
+from math import floor, isqrt, sqrt
 from typing import Any
-from math import floor, sqrt
+
 # Date: 23.02.2026
 
 
@@ -33,48 +34,48 @@ def solve_problem_57() -> int:
 
 
 # Last term of the period is equal to twice time of the initial term a_0
-# zero division error?
-def solve_problem_64() -> Any:
+# Zero division error?
+def solve_problem_64() -> None:
     counter = 0
-    for N in range(3,10000):
 
+    for N in range(3, 10000):
         F = floor(sqrt(N))
         a_0 = F
         r = 0
         s = 1
         period = [a_0]
         a = 1
+
         while a != 2 * a_0:
             # replace f = (floor(sqrt(N)) + r) // s
             f = (F + r) // s
-            r,s = s * f - r, (N - (s * f - r)**2) // s
+            r, s = s * f - r, (N - (s * f - r) ** 2) // s
             a = (F + r) // s
             period.append(a)
+
         if sqrt(N) is not int:
-            if len(period) %2 == 1:
-                counter +=1
+            if len(period) % 2 == 1:
+                counter += 1
 
         else:
             pass
 
         print(counter)
 
-# GPT SOLUTION
-from math import isqrt
-from typing import Any
 
-def solve_problem_64() -> Any:
+def solve_problem_64_chatgpt() -> Any:
     counter = 0
 
     for N in range(2, 10000):
-        F = isqrt(N)          # floor(sqrt(N))
+        F = isqrt(N)  # floor(sqrt(N))
         a_0 = F
-        if F * F == N:        # perfect square -> skip
+
+        if F * F == N:  # perfect square -> skip
             continue
 
-        r = 0                 # m
-        s = 1                 # d
-        a = a_0               # a_k
+        r = 0  # m
+        s = 1  # d
+        a = a_0  # a_k
         period_len = 0
 
         while True:
@@ -90,6 +91,7 @@ def solve_problem_64() -> Any:
             counter += 1
 
     return counter
+
 
 def solve_problem_104() -> Any:
     # TODO
