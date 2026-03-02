@@ -5,9 +5,10 @@ import time
 def parse_triangle(input: str) -> list[list[int]]:
     return [list(map(int, line.split())) for line in input.splitlines()]
 
+
 # This function calculates the maximum path sum.
 # It starts from bottom to up and moves to the upward.
-def get_max_path_sum_bottom_up(triangle: list[list[int]]) -> int:
+def get_max_path_sum(triangle: list[list[int]]) -> int:
     # It starts to iterate from the second last row up to to the top row.
     for row in range(len(triangle) - 2, -1, -1):
         # For each iteration, compare its left and right child.
@@ -26,12 +27,11 @@ def solve_problem_67() -> int:
     with open("0067_triangle.txt") as file:
         triangle: list[list[int]] = parse_triangle(file.read())
 
-    return get_max_path_sum_bottom_up(triangle)
+    return get_max_path_sum(triangle)
 
 
 if __name__ == "__main__":
     begin = time.time()
-    print(f"Result of solve_problem_67 is {solve_problem_67()}.")
+    print(f"Result of problem 67 is {solve_problem_67()}.")
     end = time.time()
     print(f"Finished in {end - begin} seconds.")
-
