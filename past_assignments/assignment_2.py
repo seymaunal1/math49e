@@ -179,8 +179,10 @@ if __name__ == "__main__":
 
     for index, function in enumerate(functions):
         begin = time.perf_counter()
-        print(f"Result of {function.__name__} is {function()}.")
+        result: int = function()
         end = time.perf_counter()
+
+        print(f"Result of {function.__name__} is {result}.")
         print(f"Finished in {end - begin} seconds.")
 
         if index < len(functions) - 1:

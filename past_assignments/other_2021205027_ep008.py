@@ -46,6 +46,8 @@ def GetProductOfDigits(string: str) -> int:
 
 if __name__ == "__main__":
     begin = time.perf_counter()
-    print(LargestAdjacentProduct())
+    result: int = LargestAdjacentProduct()
     end = time.perf_counter()
+
+    print(f"Result of problem 8 is {result}.")
     print(f"Finished in {end - begin} seconds.")

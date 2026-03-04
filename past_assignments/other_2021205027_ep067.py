@@ -138,8 +138,9 @@ def maximum_path(matrix: list[list[int]]) -> int:
 
 if __name__ == "__main__":
     begin = time.time()
-    matrix = convert_str_to_matrix(paths)
-    maximum_path_sum = maximum_path(matrix)
-    print(f"The maximum path sum is: {maximum_path_sum}")
+    matrix: list[list[int]] = convert_str_to_matrix(paths)
+    maximum_path_sum: int = maximum_path(matrix)
     end = time.time()
+
+    print(f"The maximum path sum is: {maximum_path_sum}")
     print(f"Finished in {end - begin} seconds.")

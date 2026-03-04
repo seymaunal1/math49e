@@ -3,7 +3,7 @@ import time
 from functools import reduce
 
 
-def solve_problem_8() -> None:
+def solve_problem_8() -> int:
     # Input numbers as string
     numbers: str = (
         "73167176531330624919225119674426574742355349194934"
@@ -46,14 +46,12 @@ def solve_problem_8() -> None:
     # - Convert each character to integer
     # - Multiply digits using reduce and multiplication operator
     # - Compare all results and find the maximum
-    print(
-        max(
-            map(
-                lambda result: reduce(
-                    operator.mul, map(lambda value: int(value), list(result)), 1
-                ),
-                results,
-            )
+    return max(
+        map(
+            lambda result: reduce(
+                operator.mul, map(lambda value: int(value), list(result)), 1
+            ),
+            results,
         )
     )
 
@@ -61,6 +59,8 @@ def solve_problem_8() -> None:
 # To keep the program structure clear and readable
 if __name__ == "__main__":
     begin = time.perf_counter()
-    solve_problem_8()
+    result: int = solve_problem_8()
     end = time.perf_counter()
+
+    print(f"Result of problem 8 is {result}.")
     print(f"Finished in {end - begin} seconds.")
