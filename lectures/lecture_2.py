@@ -127,9 +127,21 @@ def solve_problem_104() -> Any:
 
 
 if __name__ == "__main__":
-    begin = time.perf_counter()
-    result: int = solve_problem_64_gemini()
-    end = time.perf_counter()
+    functions = [
+        solve_problem_57,
+        # solve_problem_64,
+        solve_problem_64_chatgpt,
+        solve_problem_64_gemini,
+        # solve_problem_104,
+    ]
 
-    print(f"Result of problem 64 is {result}.")
-    print(f"Finished in {end - begin} seconds.")
+    for index, function in enumerate(functions):
+        begin = time.perf_counter()
+        result: int = function()
+        end = time.perf_counter()
+
+        print(f"Result of {function.__name__} is {result}.")
+        print(f"Finished in {end - begin} seconds.")
+
+        if index < len(functions) - 1:
+            print()
