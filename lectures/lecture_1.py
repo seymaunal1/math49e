@@ -1,10 +1,15 @@
 import operator
 import timeit
 from functools import reduce
-from typing import Any, Callable
+from typing import Any, Callable, TypedDict
 
 # import sys
 # sys.setrecursionlimit(int(4e6))
+
+
+class Problem(TypedDict):
+    name: str
+    function: Callable[[], Any]
 
 
 def solve_problem_1() -> int:
@@ -82,12 +87,16 @@ def solve_problem(name: str, function: Callable[[], Any]) -> None:
 
 
 if __name__ == "__main__":
-    solve_problem("Problem 1", solve_problem_1)
-    print()
-    solve_problem("Problem 2a", solve_problem_2a)
-    print()
-    solve_problem("Problem 2b", lambda: solve_problem_2b([1, 2]))
-    print()
-    solve_problem("Problem 2c", lambda: solve_problem_2c([1, 2]))
-    print()
-    solve_problem("Problem 2d", lambda: solve_problem_2d(1, 2, 0))
+    problems: list[Problem] = [
+        {"name": "Problem 1", "function": solve_problem_1},
+        {"name": "Problem 2a", "function": solve_problem_2a},
+        {"name": "Problem 2b", "function": lambda: solve_problem_2b([1, 2])},
+        {"name": "Problem 2c", "function": lambda: solve_problem_2c([1, 2])},
+        {"name": "Problem 2d", "function": lambda: solve_problem_2d(1, 2, 0)},
+    ]
+
+    for index, problem in enumerate(problems):
+        solve_problem(problem["name"], problem["function"])
+
+        if index < len(problems) - 1:
+            print()
