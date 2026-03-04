@@ -35,48 +35,47 @@ def solve_problem_57() -> int:
 
 # Last term of the period is equal to twice time of the initial term a_0
 # Zero division error?
-def solve_problem_64() -> None:
-    counter = 0
+def solve_problem_64() -> int:
+    counter: int = 0
 
     for N in range(3, 10000):
-        F = floor(sqrt(N))
-        a_0 = F
-        r = 0
-        s = 1
-        period = [a_0]
-        a = 1
+        F: int = floor(sqrt(N))
+        a_0: int = F
+        r: int = 0
+        s: int = 1
+        period: list[int] = [a_0]
+        a: int = 1
 
         while a != 2 * a_0:
             # replace f = (floor(sqrt(N)) + r) // s
-            f = (F + r) // s
+            f: int = (F + r) // s
             r, s = s * f - r, (N - (s * f - r) ** 2) // s
             a = (F + r) // s
             period.append(a)
 
-        if sqrt(N) is not int:
-            if len(period) % 2 == 1:
-                counter += 1
+        # if sqrt(N) is not int:
+        if len(period) % 2 == 1:
+            counter += 1
+        # else:
+        #     pass
 
-        else:
-            pass
-
-        print(counter)
+    return counter
 
 
-def solve_problem_64_chatgpt() -> Any:
-    counter = 0
+def solve_problem_64_chatgpt() -> int:
+    counter: int = 0
 
     for N in range(2, 10000):
-        F = isqrt(N)  # floor(sqrt(N))
-        a_0 = F
+        F: int = isqrt(N)  # floor(sqrt(N))
+        a_0: int = F
 
         if F * F == N:  # perfect square -> skip
             continue
 
-        r = 0  # m
-        s = 1  # d
-        a = a_0  # a_k
-        period_len = 0
+        r: int = 0  # m
+        s: int = 1  # d
+        a: int = a_0  # a_k
+        period_len: int = 0
 
         while True:
             r = s * a - r
@@ -93,6 +92,35 @@ def solve_problem_64_chatgpt() -> Any:
     return counter
 
 
+def solve_problem_64_gemini() -> int:
+    odd_periods: int = 0
+
+    for n in range(2, 10001):
+        limit: int = int(isqrt(n))
+
+        # Skip perfect squares to avoid zero division
+        if limit * limit == n:
+            continue
+
+        # Initial values for the algorithm
+        m: int = 0
+        d: int = 1
+        a: int = limit
+        period_length: int = 0
+
+        # The period ends when a = 2 * a_0
+        while a != 2 * limit:
+            m = d * a - m
+            d = (n - m**2) // d
+            a = (limit + m) // d
+            period_length += 1
+
+        if period_length % 2 == 1:
+            odd_periods += 1
+
+    return odd_periods
+
+
 def solve_problem_104() -> Any:
     # TODO
     pass
@@ -100,6 +128,8 @@ def solve_problem_104() -> Any:
 
 if __name__ == "__main__":
     begin = time.perf_counter()
-    print(solve_problem_64())
+    result: int = solve_problem_64_gemini()
     end = time.perf_counter()
+
+    print(f"Result of problem 64 is {result}.")
     print(f"Finished in {end - begin} seconds.")
