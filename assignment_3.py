@@ -49,11 +49,13 @@ def solve_problem_78_gemini() -> int:
 # p(n) = p(n - 1) + p(n - 2) - p(n - 5) - p(n - 7)..p(n - pentagonal_num)..
 
 
-def pentagonal_numbers(n) -> list:
-    nums = []
+def pentagonal_numbers(n: int) -> list[int]:
+    nums: list[int] = []
+
     if n == 1 or n == 0:
         nums.append(1)
         return nums
+
     k = 1
     while True:
         p1 = int(k * (3 * k - 1) / 2)
@@ -65,36 +67,48 @@ def pentagonal_numbers(n) -> list:
         if p1 > n and p2 > n:
             break
         k += 1
+
     return nums
 
 
 @lru_cache(maxsize=None)
-def p(n) -> int:
+def p(n: int) -> int:
     g = pentagonal_numbers(n)
+
     if n == 1 or n == 0:
         return 1
+
     if n < 0:
         return 0
+
     sum = 0
     for i in range(1, len(g) + 1):
         sum += (-1) ** ((i - 1) // 2) * p(n - g[i - 1])
+
     return sum
 
 
-def solve_problem_78():
+def solve_problem_78() -> int:
     n = 1
     divided_by = 1000000
+
     while True:
         n += 1
+
         if p(n) % divided_by == 0:
-            print(n)
-            break
+            return n
 
 
 if __name__ == "__main__":
-    begin = time.perf_counter()
-    result: int = solve_problem_78_gemini()
-    end = time.perf_counter()
+    functions = [solve_problem_78_gemini, solve_problem_78]
 
-    print(f"Result of problem 78 is {result}.")
-    print(f"Finished in {end - begin} seconds.")
+    for index, function in enumerate(functions):
+        begin = time.perf_counter()
+        result: int = function()
+        end = time.perf_counter()
+
+        print(f"Result of {function.__name__} is {result}.")
+        print(f"Finished in {end - begin} seconds.")
+
+        if index < len(functions) - 1:
+            print()
