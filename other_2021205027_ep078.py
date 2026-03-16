@@ -53,6 +53,8 @@ def solve_problem_78(limit: int = 100000) -> Optional[int]:
         if total % 1000000 == 0:
             return i
 
+    return None
+
 
 if __name__ == "__main__":
     begin = time.time()
