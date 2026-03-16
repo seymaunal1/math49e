@@ -1,4 +1,5 @@
 import time
+from typing import Optional
 
 """
 This is a alternative solution for problem 78:
@@ -18,39 +19,45 @@ However, they store all pentagonal numbers in one single list.
 
 """
 
-begin = time.time()
-limit = 100000
 
-pentagonals = []
-odd = True
-n = 1
-p = n * (3 * n - 1) // 2
-while p < limit:
-    pentagonals.append(p)
-    if odd:
-        n = -n
-    else:
-        n = -n + 1
-    odd = not odd
+def solve_problem_78(limit: int = 100000) -> Optional[int]:
+    pentagonals: list[int] = []
+    odd = True
+    n = 1
     p = n * (3 * n - 1) // 2
 
-partitions = [1]
-for i in range(1, limit + 1):
-    count = 0
-    total = 0
-    terms = [j for j in pentagonals if j <= i]
-    for term in terms:
-        if count % 4 < 2:
-            total += partitions[i - term]
+    while p < limit:
+        pentagonals.append(p)
+        if odd:
+            n = -n
         else:
-            total -= partitions[i - term]
-        count += 1
-    partitions.append(total)
-    if total % 1000000 == 0:
-        print(i)
-        break
+            n = -n + 1
+        odd = not odd
+        p = n * (3 * n - 1) // 2
+
+    partitions = [1]
+    for i in range(1, limit + 1):
+        count = 0
+        total = 0
+        terms = [j for j in pentagonals if j <= i]
+
+        for term in terms:
+            if count % 4 < 2:
+                total += partitions[i - term]
+            else:
+                total -= partitions[i - term]
+            count += 1
+
+        partitions.append(total)
+
+        if total % 1000000 == 0:
+            return i
 
 
-end = time.time()
+if __name__ == "__main__":
+    begin = time.time()
+    result = solve_problem_78()
+    end = time.time()
 
-print(f"Finished in {end - begin} seconds.")
+    print(f"Result of problem 78 is {result}.")
+    print(f"Finished in {end - begin} seconds.")
