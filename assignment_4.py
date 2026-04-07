@@ -19,7 +19,6 @@ def is_prime(n: int) -> bool:
 
 
 def solve_problem_543() -> int:
-    count = 0
     total = 2
 
     for i in range(4, 101):
