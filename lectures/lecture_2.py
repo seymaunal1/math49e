@@ -137,7 +137,7 @@ if __name__ == "__main__":
 
     for index, function in enumerate(functions):
         begin = time.perf_counter()
-        result: int = function()
+        result = function()
         end = time.perf_counter()
 
         print(f"Result of {function.__name__} is {result}.")

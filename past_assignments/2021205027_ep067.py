@@ -32,7 +32,7 @@ def solve_problem_67() -> int:
 
 if __name__ == "__main__":
     begin = time.perf_counter()
-    result: int = solve_problem_67()
+    result = solve_problem_67()
     end = time.perf_counter()
 
     print(f"Result of problem 67 is {result}.")

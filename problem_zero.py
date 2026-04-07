@@ -35,7 +35,7 @@ def solve_problem_0() -> int:
 
 if __name__ == "__main__":
     begin = time.perf_counter()
-    result: int = solve_problem_0()
+    result = solve_problem_0()
     end = time.perf_counter()
 
     print(f"Result of problem zero is {result}.")

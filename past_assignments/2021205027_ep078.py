@@ -73,7 +73,7 @@ def solve_problem_78() -> int:
 # Run the solve function
 if __name__ == "__main__":
     begin = time.time()
-    result: int = solve_problem_78()
+    result = solve_problem_78()
     end = time.time()
 
     print(f"Result of problem 78 is {result}.")

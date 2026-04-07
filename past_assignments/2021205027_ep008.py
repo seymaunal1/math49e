@@ -59,7 +59,7 @@ def solve_problem_8() -> int:
 # To keep the program structure clear and readable
 if __name__ == "__main__":
     begin = time.perf_counter()
-    result: int = solve_problem_8()
+    result = solve_problem_8()
     end = time.perf_counter()
 
     print(f"Result of problem 8 is {result}.")
