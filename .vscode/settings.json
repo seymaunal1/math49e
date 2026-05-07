@@ -1,8 +1,8 @@
 {
   "files.exclude": {
     "**/__pycache__": true,
-    ".ruff_cache": true,
     ".mypy_cache": true,
+    ".ruff_cache": true,
     ".pytest_cache": true
   },
   "git.autofetch": true
