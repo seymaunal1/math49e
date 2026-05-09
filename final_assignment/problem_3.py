@@ -1,3 +1,4 @@
+# problem 469: level 16
 import time
 from fractions import Fraction
 from math import exp
@@ -14,7 +15,8 @@ def solve_problem_469():
     """
     First our aim is find limit of A(n)/n
     """
-    # A(n) = 1 + 2/n * ∑A(i) where i = 0,1....n-2
+
+    # A(n) = 1 + 2/n * ∑A(i) where i = 0,1....n-2
     def A_n(number):
         A = [Fraction(0) for _ in range(number + 1)]
         # We know A(1) = 1
@@ -30,8 +32,8 @@ def solve_problem_469():
     # I put every A(n)'s in a list up to 1000 to find their limit.
     A = A_n(number)
 
-#    print("n\tA_n\t\tA_n/n\t\td_n")
-#    print("-" * 80)
+    #    print("n\tA_n\t\tA_n/n\t\td_n")
+    #    print("-" * 80)
     # In here, I looked at the increment of A(n) and compare to the A(n)/n and we can easily see that
     # after some n, the A(n)/n ~ d_n = 0.43233235838169 and  we know that this number is the result of
     # (1 - e **2) / 2
@@ -39,12 +41,13 @@ def solve_problem_469():
         d_n = A[n] - A[n - 1]
 
         # You can uncomment this line if you want to see the results of d_n and A[n]/n.
-        #print(f"{n}\t{float(A[n]/n)}\t{float(d_n):.14f}")
+        # print(f"{n}\t{float(A[n]/n)}\t{float(d_n):.14f}")
 
     # Because of the previous calculations, we will calculate E_n = 1 - ((1 - e **2) / 2)
     E_n = 1 - ((1 - exp(-2)) / 2)
 
-    return (f"{E_n:.14f}")
+    return f"{E_n:.14f}"
+
 
 if __name__ == "__main__":
     begin = time.time()
