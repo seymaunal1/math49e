@@ -4,7 +4,11 @@ version = "0.0.1"
 description = "Solutions to Project Euler problems"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "clock>=0.1",
+    "factors>=0.1.1",
+    "sympy>=1.14.0",
+]
 
 [dependency-groups]
 dev = [

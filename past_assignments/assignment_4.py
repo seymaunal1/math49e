@@ -21,7 +21,7 @@ def is_prime(n: int) -> bool:
 def solve_problem_543() -> int:
     total = 2
 
-    for i in range(4, 101):
+    for i in range(4, 7014087):
         # üçten büyük tüm çift sayılar k=1 i tutmaz k=2 yi tutar goldbach conjecture
         if i > 3 and i % 2 == 0:
             par_number = i // 2 - 1
