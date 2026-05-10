@@ -1,20 +1,23 @@
 from array import array
 
 N = 10_000_000
+#to determine the last 18 digits
 MOD = 10**18
-
-
+# we labeled all the prime up to n with that sieve function
 def sieve(n):
     comp = bytearray(n + 1)
     comp[0] = comp[1] = 1
 
     for i in range(2, int(n**0.5) + 1):
         if not comp[i]:
-            comp[i*i:n+1:i] = b"\x01" * (((n - i*i) // i) + 1)
-
+            comp[i*i :n+1 :i] = b"\x01" * (((n - i*i) // i) + 1)
     return comp
 
 
+print(sieve(n=100))
+
+# Tonelli - Shanks Algorithm:
+# z ** ((p - 1)/2
 def sqrt_minus_one(p):
     z = 2
     while pow(z, (p - 1) // 2, p) != p - 1:
@@ -26,7 +29,7 @@ def solve(n):
     limit = 2 * n
     comp = sieve(limit)
 
-    rem = array("Q", (4 * k * k + 1 for k in range(n + 1)))
+    rem = array("Q", (4 * k ** 2  + 1 for k in range(n + 1)))
     best = array("Q", [0]) * (n + 1)
 
     for p in range(5, limit + 1, 4):
