@@ -26,12 +26,14 @@ Also another reason is that: they checked all the primes up to N//2, meanwhile I
 
 
 begin = time.time()
+
+
 # they find all the primes up to N//2
 def all_primes_below_n(n):
     primes_bool = [False, False] + [True] * (n - 2)
     for k in range(2, int(math.sqrt(n)) + 1):
         if primes_bool[k]:
-            for l in range(2*k,n,k):
+            for l in range(2 * k, n, k):
                 primes_bool[l] = False
     # Collect prime numbers into a list
     primes_list = []
@@ -40,22 +42,25 @@ def all_primes_below_n(n):
             primes_list.append(k)
     return primes_list
 
-def log(a,b):
-    # returns the limit of numbers of powers
-    return math.floor(math.log(b,a)) + 1
 
-def M(p,q,N):
+def log(a, b):
+    # returns the limit of numbers of powers
+    return math.floor(math.log(b, a)) + 1
+
+
+def M(p, q, N):
     # Find the largest p^lp * q^lq <= N
     max = 0
     # Try powers of p that holds the condition
-    for lp in range(1,log(p,N / q)):
+    for lp in range(1, log(p, N / q)):
         # Try powers of p that holds the condition
-        for lq in range(1,log(q,N / p)):
-            res = p**lp*q**lq
+        for lq in range(1, log(q, N / p)):
+            res = p**lp * q**lq
             if res < N + 1:
                 if res > max:
                     max = res
     return max
+
 
 def S(N):
     # All possible prime values up to N//2
@@ -66,14 +71,15 @@ def S(N):
     # Choose p from smaller prime list
     for p in range(len(good_p)):
         # Choose q after p to keep p < q
-        for q in range(p + 1,len(primes)):
+        for q in range(p + 1, len(primes)):
             # Calculate M for prime pair
-            m = M(primes[p],primes[q],N)
+            m = M(primes[p], primes[q], N)
             sum += m
             # If M is 0, q is too large, so stop this inner loop
             if m == 0:
                 break
     return sum
+
 
 print(S(10**7))
 end = time.time()

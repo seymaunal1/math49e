@@ -25,8 +25,17 @@ A_n sequence and does not use decimal arithmetic. It only evaluates a short
 begin = time.time()
 n = 10**18
 # they directly calculate series:  f(m) = sum((-2)^(k-1) * (m-k+1) / k!) ~ ((1 - e **2) / 2) up to 100
-print('%.14f' % (1-(sum((-2)**(k-1)*(n-3-k+1)/factorial(k) for k in range(1, 100))+1)/n))
+print(
+    "%.14f"
+    % (
+        1
+        - (
+            sum((-2) ** (k - 1) * (n - 3 - k + 1) / factorial(k) for k in range(1, 100))
+            + 1
+        )
+        / n
+    )
+)
 
 end = time.time()
 print(f"Finished in {end - begin} seconds.")
-

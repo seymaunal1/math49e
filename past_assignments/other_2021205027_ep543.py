@@ -36,7 +36,7 @@ def S(n):
     # For very small n, the formula simplifies, so we can directly return pi(n)
     if n <= 3:
         return r
-    # To find 2-partitions:
+    # To find 2-partitions:
     # they found (n - 2 primes) + (number of even numbers) - (exceptions)
     r += pi(n - 2) + n // 2 - 2
     # Similarly, for small n, higher-order terms are not needed,
@@ -48,13 +48,13 @@ def S(n):
     # Final correction term:
     return r - (n // 2) * (n // 2 + 1) + 6
 
+
 # general way to find fibonacci sequence
 F = [0, 1]
 for k in range(43):
     F.append(F[-1] + F[-2])
 end = time.time()
 
-# cFind the sum of all S(F(k)) over 3 <= k <= 44
+# cFind the sum of all S(F(k)) over 3 <= k <= 44
 print(f"Result of problem 543 is {sum(map(S, F[3:]))}.")
 print(f"Finished in {end - begin} seconds.")
-

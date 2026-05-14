@@ -27,21 +27,25 @@ shorter and more optimized because it uses the linear structure of F(n).
 """
 
 a, b, c = 21**7, 7**21, 12**7
+
+
 # to understand how many a in b-n: (b-n)//a
 # F(n) is written in its simplified closed form.
 def F(n):
-  return ((b-n)//a) * (4*a-3*c) + 4*(a-c) + n
+    return ((b - n) // a) * (4 * a - 3 * c) + 4 * (a - c) + n
+
 
 def S():
-  # t is the remainder when b is divided by a.
-  # It separates the last incomplete block from the full blocks.
-  t = b%a
-  # F(n) forms arithmetic sequences on these blocks.
-  # number_of_terms * (first_term + last_term) / 2
-  return ( (b-t) * (F(b)+F(t+1)) + (t+1) * (F(t)+F(0)) ) // 2
+    # t is the remainder when b is divided by a.
+    # It separates the last incomplete block from the full blocks.
+    t = b % a
+    # F(n) forms arithmetic sequences on these blocks.
+    # number_of_terms * (first_term + last_term) / 2
+    return ((b - t) * (F(b) + F(t + 1)) + (t + 1) * (F(t) + F(0))) // 2
+
 
 print(S())
 
 
-end= time.time()
+end = time.time()
 print(f"Finished in {end - begin} seconds.")

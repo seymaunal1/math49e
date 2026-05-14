@@ -11,6 +11,8 @@ begin = time.time()
 * A(N): refers to the number of seated knights in a row of n chairs
 * since after first person seat, the round table transformed to the row table.
 """
+
+
 def solve_problem_469():
     """
     First our aim is find limit of A(n)/n
