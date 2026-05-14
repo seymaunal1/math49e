@@ -1,65 +1,58 @@
-from array import array
-
-N = 10_000_000
-# to determine the last 18 digits
-MOD = 10**18
+import time
 
 
-# we labeled all the prime up to n with that sieve function
-def sieve(n):
-    comp = bytearray(n + 1)
-    comp[0] = comp[1] = 1
+def solve_problem_659() -> int:
+    N = 10_000_000
+    LIMIT = 2 * N
 
-    for i in range(2, int(n**0.5) + 1):
-        if not comp[i]:
-            comp[i * i : n + 1 : i] = b"\x01" * (((n - i * i) // i) + 1)
-    return comp
+    # Sieve to find primes up to LIMIT
+    sieve = bytearray([1]) * (LIMIT + 1)
+    sieve[0] = sieve[1] = 0
+    for i in range(2, int(LIMIT**0.5) + 1):
+        if sieve[i]:
+            sieve[i * i : LIMIT + 1 : i] = bytearray([0]) * len(
+                range(i * i, LIMIT + 1, i)
+            )
 
+    primes = [i for i in range(5, LIMIT + 1, 4) if sieve[i]]
 
-print(sieve(n=100))
+    V = [4 * k * k + 1 for k in range(N + 1)]
+    P = [0] * (N + 1)
 
+    for p in primes:
+        # Find a quadratic non-residue
+        a = 2
+        while pow(a, (p - 1) // 2, p) != p - 1:
+            a += 1
 
-# Tonelli - Shanks Algorithm:
-# z ** ((p - 1)/2
-def sqrt_minus_one(p):
-    z = 2
-    while pow(z, (p - 1) // 2, p) != p - 1:
-        z += 1
-    return pow(z, (p - 1) // 4, p)
+        # Calculate modular square root of -1
+        r = pow(a, (p - 1) // 4, p)
 
+        # Calculate starting indices
+        k1 = (r * ((p + 1) // 2)) % p
+        k2 = p - k1
 
-def solve(n):
-    limit = 2 * n
-    comp = sieve(limit)
+        # Sieve out the prime factor p from V[k]
+        for k_start in (k1, k2):
+            for k in range(k_start, N + 1, p):
+                v = V[k]
+                v //= p
+                while v % p == 0:
+                    v //= p
+                V[k] = v
+                P[k] = p
 
-    rem = array("Q", (4 * k**2 + 1 for k in range(n + 1)))
-    best = array("Q", [0]) * (n + 1)
+    ans = sum(max(P[k], V[k]) for k in range(1, N + 1))
 
-    for p in range(5, limit + 1, 4):
-        if comp[p]:
-            continue
-
-        root = sqrt_minus_one(p)
-        inv2 = (p + 1) // 2
-
-        r1 = root * inv2 % p
-        r2 = (-r1) % p
-
-        for r in (r1, r2):
-            if r == 0:
-                r = p
-
-            for k in range(r, n + 1, p):
-                while rem[k] % p == 0:
-                    rem[k] //= p
-                best[k] = p
-
-    ans = 0
-
-    for k in range(1, n + 1):
-        ans = (ans + max(best[k], rem[k])) % MOD
-
-    return ans
+    return ans % (10**18)
 
 
-print(f"{solve(N):018d}")
+if __name__ == "__main__":
+    begin = time.perf_counter()
+    result = solve_problem_659()
+    end = time.perf_counter()
+
+    print(f"Result of problem 659 is {result}.")
+    print(f"Finished in {end - begin} seconds.")
+
+    assert result == 238518915714422000, "The result is wrong"
