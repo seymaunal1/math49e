@@ -5,8 +5,6 @@ description = "Solutions to Project Euler problems"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "clock>=0.1",
-    "factors>=0.1.1",
     "sympy>=1.14.0",
 ]
 
