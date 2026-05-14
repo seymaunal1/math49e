@@ -1,59 +1,41 @@
-# problem 340/level:09
-
 import time
 
-MOD = 1_000_000_000
 
+def solve_problem_340() -> int:
+    # Constants given in the problem
+    a = 21**7
+    b = 7**21
+    c = 12**7
+    MOD = 10**9
 
-def F(n: int, a: int, b: int, c: int) -> int:
-    """
-    This is the simplified version of F(a + F(a + F(a + F(a + n)))).
-    """
-    # it's given that if n bigger than b: F(n) = n - c
-    if n > b:
-        F_n = n - c
-        return F_n % MOD  # to optimize the result.
-    # we count the steps that at how many steps we can reach k * n > b
-    k = (b - n) // a
-    # this function directly result of the algorithm
-    F_n = (k + 1) * a - c + n + (k + 1) * 3 * (a - c)
-    return F_n
+    # q and r such that b = q*a + r
+    q, r = divmod(b, a)
 
+    # Term 1: Sum of n from 0 to b
+    # Formula: b*(b+1)/2
+    s1 = (b * (b + 1) // 2) % MOD
 
-# The result of the problem is independent from F(n),
-# however you can uncomment these lines to see F(n) is working:
-# print(F(n=0, a=50, b=2000, c=40))
-# print(F(n=2000, a=50, b=2000, c=40))
+    # Term 2: Sum of constant (4a - 4c) for (b+1) terms
+    s2 = ((b + 1) * (4 * a - 4 * c)) % MOD
 
+    # Term 3: (4a - 3c) * Sum_{k=0 to b} floor(k/a)
+    # The sum of floor(k/a) from 0 to b=qa+r is:
+    # a * (0 + 1 + ... + q-1) + (r+1) * q
+    # = a * q * (q-1) / 2 + q * (r + 1)
+    sum_floor = (a * q * (q - 1) // 2 + q * (r + 1)) % MOD
+    s3 = ((4 * a - 3 * c) * sum_floor) % MOD
 
-def S(a: int, b: int, c: int) -> int:
-    """
-    Now we will calculate the sum of F(n) from 0 up to b = 7**21 i.e. S = ∑F(n)
-    However it is hard to calculate directly so we will separate the summation.
-    And in the algorithm we conclude that the summation of the F_n is independent from F_n formula.
-    As it is written in the algorithm we split the S to easier calculation.
-    S = sum_k + sum_n - sum_c where
-    """
-    # b = q*a + r
-    q = b // a  # the number of a in b
-    r = b % a  # remainder of r
-
-    # sum_n: ∑n = b * (b + 1) // 2
-    sum_n = b * (b + 1) // 2
-    # sum_c: ∑c:c * (b + 1)
-    sum_c = c * (b + 1)
-    # sum_k:(4*a - 3*c)*∑(k+1)
-    sum_k1 = (q + 1) * (r + 1) + a * q * (q + 1) // 2
-    sum_k = sum_k1 * (4 * a - 3 * c)
-    # the result of S(n)
-    S = sum_k + sum_n - sum_c
-    return S % MOD
+    # Result is the sum of all terms mod 10^9
+    result = (s1 + s2 + s3) % MOD
+    return result
 
 
 if __name__ == "__main__":
-    begin = time.time()
-    result = S(a=21**7, b=7**21, c=12**7)
-    end = time.time()
+    begin = time.perf_counter()
+    result = solve_problem_340()
+    end = time.perf_counter()
 
-    print(f"Result of problem 340 is {result}.")
+    print(f"Result of problem 347 is {result}.")
     print(f"Finished in {end - begin} seconds.")
+
+    assert result == 291504964, "The result is wrong"

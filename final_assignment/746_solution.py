@@ -1,64 +1,72 @@
-# problem 746: level 16
-
 import time
 
 
-# from the our algorithm the
-# S(n) =∑∑(-1)**j * C(k,j) * 2 * j! * (4k/4k-3j) * (C(4k - 3j, j)) * 4 **j * ((2k-2j)!)**2
-# Also we take the modulo for every calculation to obtained relatively small numbers each time.
-def solve_problem_746(N: int, MOD: int, MAXF: int):
-    # factorial list, since we will recall the factorials many times we can not use factorial() method from math
-    # we need efficient way to write it
-    fact = [1] * (MAXF + 1)
-    inverse_fact = [1] * (MAXF + 1)
-    for i in range(1, MAXF + 1):
-        fact[i] = fact[i - 1] * i % MOD
-    # according to fermat's litte theorem MAXF**-1 = MAXF ** MOD-2 (mod MOD)
-    inverse_fact[MAXF] = pow(fact[MAXF], MOD - 2, MOD)
-    # calculate the inverse factorial to write combinatorial function
-    for i in range(MAXF, 0, -1):
-        inverse_fact[i - 1] = inverse_fact[i] * i % MOD
+def solve_problem_746() -> int:
+    MOD: int = 1000000007
+    N_LIMIT: int = 2021
+    MAX_VAL: int = 4 * N_LIMIT + 1
 
-    # combinatoric function
-    def C(n, r):
-        # eliminate edge cases
+    # Precompute factorials and inverse factorials
+    fact: list[int] = [1] * MAX_VAL
+    inv_fact: list[int] = [1] * MAX_VAL
+    for i in range(1, MAX_VAL):
+        fact[i] = (fact[i - 1] * i) % MOD
+    inv_fact[MAX_VAL - 1] = pow(fact[MAX_VAL - 1], MOD - 2, MOD)
+    for i in range(MAX_VAL - 2, -1, -1):
+        inv_fact[i] = (inv_fact[i + 1] * (i + 1)) % MOD
+
+    # Added type hints to n and r, and the return type -> int
+    def nCr_mod(n: int, r: int) -> int:
         if r < 0 or r > n:
             return 0
-        # n! / (n-r)!r!
-        return fact[n] * inverse_fact[r] % MOD * inverse_fact[n - r] % MOD
+        return fact[n] * inv_fact[r] % MOD * inv_fact[n - r] % MOD
 
-    def M(k):
-        """
-        M(k) = ∑(-1)**j * C(k,j) * 2 * j! * (4k/4k-3j) * (C(4k - 3j, j)) * 4 **j * ((2k-2j)!)**2
-        """
-        ans = 0
-        for j in range(k + 1):
-            term = 1
-            # r = ((2k-2j)!)**2
-            r = 2 * k - 2 * j
-            blocks = (
-                (4 * k)
-                * pow(4 * k - 3 * j, MOD - 2, MOD)
-                * C(4 * k - 3 * j, j)
-                * fact[r]
-                * fact[r]
-            )
-            term = term * C(k, j) * 2 * fact[j] * blocks * pow(4, j)
-            # inclusion-exlusion principle
-            ans += term * (-1) ** j
-        return ans
+    # Precompute inverses for the block placement formula
+    inv: list[int] = [0] * MAX_VAL
+    for i in range(1, MAX_VAL):
+        inv[i] = pow(i, MOD - 2, MOD)
 
-    return sum(M(k) for k in range(2, N + 1)) % MOD
+    # Precompute powers of 4
+    pow4: list[int] = [1] * (N_LIMIT + 1)
+    for i in range(1, N_LIMIT + 1):
+        pow4[i] = (pow4[i - 1] * 4) % MOD
 
+    total_s: int = 0
+    for n in range(2, N_LIMIT + 1):
+        m_n_val: int = 0
+        for k in range(n + 1):
+            nk: int = 0
+            if k == 0:
+                nk = (fact[2 * n] * fact[2 * n]) % MOD
+            else:
+                # N(k) calculation
+                # Number of ways to place k non-overlapping blocks of 4 in 4n seats
+                ways_blocks: int = (4 * n * nCr_mod(4 * n - 3 * k, k)) % MOD
+                ways_blocks = (ways_blocks * inv[4 * n - 3 * k]) % MOD
 
-MOD = 10**9 + 7  # given modulo= 1.000.000.007
-N = 2021  # given n= 2021
-MAXF = 4 * N  # number of people in N many family
+                nk = (ways_blocks * fact[k]) % MOD
+                nk = (nk * pow4[k]) % MOD
+                nk = (nk * fact[2 * n - 2 * k]) % MOD
+                nk = (nk * fact[2 * n - 2 * k]) % MOD
+
+            term: int = (nCr_mod(n, k) * nk) % MOD
+            if k % 2 == 1:
+                m_n_val = (m_n_val - term) % MOD
+            else:
+                m_n_val = (m_n_val + term) % MOD
+
+        # M(n) = 2 * (Inclusion-Exclusion Sum)
+        total_s = (total_s + 2 * m_n_val) % MOD
+
+    return total_s % MOD
+
 
 if __name__ == "__main__":
     begin = time.perf_counter()
-    result = solve_problem_746(N=N, MOD=MOD, MAXF=MAXF)
+    result = solve_problem_746()
     end = time.perf_counter()
 
     print(f"Result of problem 746 is {result}.")
     print(f"Finished in {end - begin} seconds.")
+
+    assert result == 867150922, "The result is wrong"
