@@ -31,7 +31,7 @@ a, b, c = 21**7, 7**21, 12**7
 
 # to understand how many a in b-n: (b-n)//a
 # F(n) is written in its simplified closed form.
-def F(n):
+def F(n: int) -> int:
     return ((b - n) // a) * (4 * a - 3 * c) + 4 * (a - c) + n
 
 

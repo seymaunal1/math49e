@@ -5,7 +5,7 @@ import time
 MOD = 1_000_000_000
 
 
-def F(n, a, b, c):
+def F(n: int, a: int, b: int, c: int) -> int:
     """
     This is the simplified version of F(a + F(a + F(a + F(a + n)))).
     """
