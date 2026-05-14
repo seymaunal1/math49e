@@ -1,5 +1,7 @@
 import time
 
+from sympy import primepi as pi
+
 """
 This is an alternative solution for problem 543:
 * Mikhail Lomonosov
@@ -27,7 +29,6 @@ begin = time.time()
 # ready-made function that counts number of prime up to n.
 # SymPy must be installed before running this code:
 #       pip install sympy
-from sympy import primepi as pi
 
 
 def S(n):
