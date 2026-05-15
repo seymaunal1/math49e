@@ -16,6 +16,7 @@ repos:
       - id: ruff-check
         name: lint with ruff
         args: [--fix]
+
       - id: ruff-format
         name: format with ruff
 
