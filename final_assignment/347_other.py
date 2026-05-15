@@ -26,23 +26,22 @@ Also another reason is that: they checked all the primes up to N//2, meanwhile I
 
 """
 
-
 begin = time.time()
 
 
 # they find all the primes up to N//2
 def all_primes_below_n(n: int) -> list[int]:
     primes_bool = [False, False] + [True] * (n - 2)
-    for k in range(2, int(math.sqrt(n)) + 1):
-        if primes_bool[k]:
-            for l in range(2 * k, n, k):
-                primes_bool[l] = False
+    for i in range(2, int(math.sqrt(n)) + 1):
+        if primes_bool[i]:
+            for j in range(2 * i, n, i):
+                primes_bool[j] = False
 
     # Collect prime numbers into a list
     primes_list: list[int] = []
-    for k in range(n):
-        if primes_bool[k]:
-            primes_list.append(k)
+    for i in range(n):
+        if primes_bool[i]:
+            primes_list.append(i)
 
     return primes_list
 

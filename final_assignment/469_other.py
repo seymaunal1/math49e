@@ -22,7 +22,9 @@ So, the alternative solution is faster because it does not build the recursive
 A_n sequence and does not use decimal arithmetic. It only evaluates a short
 100-term summation using the closed-form formula.
 """
+
 begin = time.time()
+
 n = 10**18
 # they directly calculate series:  f(m) = sum((-2)^(k-1) * (m-k+1) / k!) ~ ((1 - e **2) / 2) up to 100
 print(
