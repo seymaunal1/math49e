@@ -1,3 +1,5 @@
+# type: ignore
+
 # repunit: repeated unit, all digits is equal to one
 # problem 132:
 

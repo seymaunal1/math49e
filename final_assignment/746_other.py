@@ -1,3 +1,5 @@
+# type: ignore
+
 import time
 
 """
@@ -22,6 +24,7 @@ uses faster precomputed combination lookups, and keeps the intermediate values s
 """
 
 begin = time.time()
+
 N = 2  # M(N) = 896
 N = 3  # M(N) = 890880
 N = 10  # S(N) % MOD = 399291975

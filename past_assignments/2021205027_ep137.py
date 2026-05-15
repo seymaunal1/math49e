@@ -1,3 +1,5 @@
+# type: ignore
+
 # problem 137: Fibonacci Golden Nuggets
 
 # In this problem even though the code is simple, algortihm is the essential part of the assignment.

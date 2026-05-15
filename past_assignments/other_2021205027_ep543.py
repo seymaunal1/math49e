@@ -1,3 +1,5 @@
+# type: ignore
+
 import time
 
 from sympy import primepi as pi
