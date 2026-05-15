@@ -3,7 +3,7 @@ name = "math49e"
 version = "0.0.1"
 description = "Solutions to Project Euler problems"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 dependencies = [
     "sympy>=1.14.0",
 ]
