@@ -15,5 +15,8 @@ dev = [
     "ty>=0.0.18",
 ]
 
+[tool.pyright]
+typeCheckingMode = "strict"
+
 [tool.ruff.lint]
 extend-select = ["I"]
